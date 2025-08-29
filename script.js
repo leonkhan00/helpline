@@ -72,3 +72,33 @@ for (const callBtn of callBtns) {
     }
   });
 }
+
+
+// function for clear history button
+const clearHistoryBtn = document.getElementById("clearBtn");
+clearHistoryBtn.addEventListener("click", function () {
+  historyContainer.innerText = "";
+  historyDatas = [];
+});
+
+// functionlity for copy button
+let copyCounter = 0;
+const copyBtns = document.querySelectorAll(".copyBtn");
+for (const copyBtn of copyBtns) {
+  copyBtn.addEventListener("click", function () {
+    const copyElement = document.getElementById("copyCount");
+    copyCounter++;
+    copyElement.innerText = copyCounter;
+    const copyText =
+      copyBtn.parentElement.previousElementSibling.firstElementChild.innerText;
+    // Use Clipboard API
+    navigator.clipboard
+      .writeText(copyText)
+      .then(() => {
+        alert("Number Copied: " + copyText); // success feedback
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  });
+}
